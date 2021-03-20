@@ -1,24 +1,14 @@
 from django import forms
-from django.contrib.auth.models import User
+from .models import NewUser
 from django.contrib.auth.forms import UserCreationForm
-from .models import Profile
 
 
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
-    ngo = forms.BooleanField(required=False)
-    class Meta:
-        model = User
-        fields = ["username", 'email', 'ngo', 'password1', 'password2']
-
-class UserUpdateForm(forms.ModelForm):
-    email = forms.EmailField()
+    is_hospital = forms.BooleanField(required=False)
 
     class Meta:
-        model = User
-        fields = ["username", 'email']
+        model = NewUser
+        fields = ['user_name', 'email', 'is_hospital', 'password1', 'password2']
 
-class ProfileUpdateForm(forms.ModelForm):
-    class Meta:
-        model = Profile 
-        fields = ['image']
+        

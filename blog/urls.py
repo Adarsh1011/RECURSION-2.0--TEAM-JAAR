@@ -1,21 +1,30 @@
-from blog.api import urls as api_url
-from django.urls import path, include
-from .views import (PostListView, PostDetailView, PostCreateView,PostUpdateView, PostDeleteView, CategoryView,PostListView2,PostDetailView2)
+"""django_project URL Configuration
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/3.1/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+from django.urls import path
+# from .views import PostDetailView
 from . import views
+from .views import (
+                    PostUpdateView, PostDeleteView
+)
 
 urlpatterns = [
-    
-    path('', views.mainhome, name='main-home'),
-    path('blogs/', PostListView.as_view(), name='blog-home'),
-    path('post/<int:pk>/', PostDetailView, name='post-detail'),
+    path('', views.home, name="blog-home"),
+    path('about/', views.about, name="blog-about"),
+    path('post/new/', views.PostCreateView, name='post-create'),
+    path('post/<int:pk>/', views.PostDetailView, name='post-detail'),
     path('post/<int:pk>/update', PostUpdateView.as_view(), name='post-update'),
-    path('post/new/', PostCreateView.as_view(), name='post-create'),
     path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
-    path('about/', views.about, name='blog-about'),
-    path('category/<str:cats>/', CategoryView, name='category'),
-    # path('donate/', views.DonateView, name='donate'),
-    path('dashboard/', views.DashboardView, name='dashboard'),
-    path('blogs2/', PostListView2.as_view(), name='blog-home2'),
-    path('post2/<int:pk>/', PostDetailView2, name='post-detail2'),
-    path('api/', include(api_url)),
 ]

@@ -1,21 +1,18 @@
 {% extends 'blog/base.html' %}
-{% load crispy_forms_tags %}
 {% block content %}
 <style>
-    article.media.content-section {
-    box-shadow: -7px -7px 14px #00000060;
-    border-radius: 20px;
-    margin-top: 20px;
-}
-h1{
-    margin-top: 100px;
-    margin-bottom: 20px;
-    text-shadow: -3px -3px 6px #00000060;
-}
-</style>
-<h1>Donation Requests</h1>
+    button.btn.btn-outline-info {
+      background-color: rgb(63, 171, 243);
+      font-weight: 600;
+      transition: 0.5s;
+  }
+  button.btn.btn-outline-info:hover {
+      background-color: rgb(255, 204, 95);
+      color: black;
+  }
+  </style>
     <article class="media content-section">
-        <img class = "rounded-circle article-img" src="{{ post.author.profile.image.url }}">
+        <img  src="{{ post.author.profile.image.url }}">
         <div class="media-body">
             <div class="article-metadata">
             <a class="mr-2" href="#">{{ post.author }}</a>
@@ -27,22 +24,122 @@ h1{
                 </div>
             {% endif %}
             </div>
-            <h2 class="article-title">{{ post.title }}</h2>
+            <h2 class="article-title">{{ post.name }}</h2>
+            <!-- <h4>Donor's Info</h4> -->
             <p class="article-content">{{ post.content }}</p>
-            {% if user.is_authenticated %}
-            {% if post.author != user %}
-                <form method="POST">
-                    {% csrf_token %}
-                    <fieldset class="form-group">
-                        {{ form|crispy }}
-                    </fieldset>
-                    <div class="form-group">
-                        <button class="btn btn-outline-info" type="submit">Donate</button>
-                    </div>
-                </form>
-            {% endif %}
-        {% endif %}
-        </div>
+
+            {% comment %} <p class="article-content">{{ post.author }}</p>
+            <p class="article-content">{{ post.covid_cap }}</p>
+
+            <p class="article-content">{{ post.norm_cap }}</p>
+            {% endcomment %}
+            <!-- <h4>General Details</h4>
+
+            <div> 
+                <table class="table table-hover table-dark">
+                <tbody>
+                    <tr>
+                    <th scope="row">1</th>
+                    <td>Name</td>
+                    <td>{{post.author}}</td>
+                    </tr>
+                    <tr>
+                    <th scope="row">2</th>
+                    <td>Gender</td>
+                    <td> {{post.author.profile.gender | safe}}</td> 
+                    </tr>
+                    <tr>
+                    <th scope="row">3</th>
+                    <td>Age</td>
+                    <td>{{post.author.profile.age | safe}}</td> 
+                    </tr>
+                    <tr>
+                    <th scope="row">4</th>
+                    <td>Weight</td>
+                    <td>{{post.weight | safe}}</td> 
+                    </tr>
+                    <tr>
+                    <th scope="row">5</th>
+                    <td>Blood Group</td>
+                    <td>{{post.author.profile.blood_group| safe}}</td> 
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+
+            
+            <h4>Location Details</h4>
+            <div> 
+                <table class="table table-hover table-dark">
+                <tbody>
+                    <tr>
+                    <th scope="row">1</th>
+                    <td>District</td>
+                    <td>{{ post.author.profile.district | safe}}</td> 
+                    </tr>
+                    <tr>
+                    <th scope="row">2</th>
+                    <td>Nearest Hospital</td>
+                    <td>{{ post.author.profile.Hospital | safe}}</td> 
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+
+            <h4>Further Details</h4>
+            <div> 
+                <table class="table table-hover table-dark">
+                <tbody>
+                    <tr>
+                    <th scope="row">1</th>
+                    <td>Pregnant</td>
+                    <td>{{ post.pregnant | safe}}</td> 
+                    </tr>
+                    <tr>
+                    <th scope="row">2</th>
+                    <td>Anemia</td>
+                    <td>{{post.anemia| safe}}</td> 
+                    </tr>
+                    <tr>
+                    <th scope="row">3</th>
+                    <td>Infectious Disease</td>
+                    <td>{{ post.infectious_diseases| safe}}</td> 
+                    </tr>
+                    <tr>
+                    <th scope="row">4</th>
+                    <td>Donor doesn't have covid symptoms for 14 days</td>
+                    <td>{{ post.days | safe}}</td> 
+                    </tr>
+                    <tr>
+                    <th scope="row">5</th>
+                    <td>Donor has taken a follow up covid test</td>
+                    <td>{{ post.test | safe}}</td> 
+                    </tr>
+                    <tr>
+                    <th scope="row">6</th>
+                    <td>Covid test was positive</td>
+                    <td>{{ post.covid | safe}}</td> 
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+            
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                
+                </fieldset>
+                {% if user.profile.is_donor == False %}
+                    {% if post.author == user %}
+                    {% else %}
+                        <div class="form-group">
+                            <button class="btn btn-outline-info" type="submit">Receive Donation</button>
+                        </div>
+                    {% endif %}
+                {% endif %}
+            </form>
+                -->
+        </div> 
         
     </article>
 {% endblock content%}
