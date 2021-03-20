@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
+
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-from .forms import PostForm
+from .forms import PostForm, BedForm, Booking
 from django.core.mail import send_mail
 from django.contrib import messages
-from .models import Post
+from .models import Post, BedRequest
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (ListView, DetailView, CreateView,
                                   UpdateView, DeleteView
@@ -22,46 +23,87 @@ def about(request):
 
 @login_required
 def PostCreateView(request):
-    if request.method== 'POST':
-        form=PostForm(request.POST)
-        if form.is_valid():
-            form.instance.author = request.user
-            form.save() 
-            
-            messages.success(request, f'Your hospital is registered!')
-            return redirect("blog-home")
+    if len(Post.objects.filter(author = request.user)) == 0:
+        if request.method== 'POST':
+            form=PostForm(request.POST)
+            if form.is_valid():
+                form.instance.author = request.user
+                form.save() 
+                
+                messages.success(request, f'Your hospital is registered!')
+                return redirect("blog-home")
+        else:
+            form=PostForm()
+            context = {
+                "form": form,
+            }
+            return render(request,'blog/post_form.html',context)
     else:
-        form=PostForm()
-        context = {
-            "form": form,
-        }
-        return render(request,'blog/post_form.html',context)
+        return redirect("blog-home")
 
-@login_required
+# @login_required
 def PostDetailView(request,pk):
     if request.method== 'POST':
         form=BedForm(request.POST)
         if form.is_valid():
             # form.save()
-            donation =Donation()
+            rq =BedRequest()
             post = get_object_or_404(Post, pk=pk)
-            donation.receiver= request.user
-            donation.donor= post.author
-            donation.City= post.district
-            donation.Hospital = post.author.profile.Hospital
-            donation.save()
-            send_mail('Health-a-gram has some great news for you',f' {request.user} ({request.user.email}) needs your help!',settings.EMAIL_HOST_USER,[f'{post.author.email}'],fail_silently=False)
-            messages.success(request, f'We have notified the Donor, thankyou for the using Health-a-gram')
-            return redirect('dash-view')
+            rq.aadhar_number = form.cleaned_data.get('aadhar_number')
+            
+            rq.phone_number = form.cleaned_data.get('phone_number')
+            rq.name = form.cleaned_data.get('name')
+            rq.address = form.cleaned_data.get('address')
+            rq.city = form.cleaned_data.get('city')
+            rq.pin_code = form.cleaned_data.get('pin_code')
+            rq.gender = form.cleaned_data.get('gender')
+            rq.age = form.cleaned_data.get('age')
+            rq.co_mobidity = form.cleaned_data.get('co_mobidity')
+            rq.ambulance_required= form.cleaned_data.get('ambulance_required')
+            rq.scheme = form.cleaned_data.get('scheme')
+            rq.health_centre = post.author.username
+            rq.tested = form.cleaned_data.get('tested')
+            rq.symptoms = form.cleaned_data.get('symptoms')
+           
+            rq.save()
+            return redirect('blog-home')          
         else:
             pass
     else:
-        # form=BedForm()
-        context = {
-            # "form": form,
+        form=BedForm()
+        
+        return render(request,'blog/post_detail.html', {
+            "form": form,
             "post": get_object_or_404(Post, pk=pk),
-        }
-        return render(request,'blog/post_detail.html',context)
+        })
+
+# class PatientDetailView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+#     model = Post
+#     template_name = 
+
+
+def PatientDetailView(request, pk):
+    if request.method== 'POST':
+        form=Booking(request.POST)
+        if form.is_valid():
+            ch = form.cleaned_data.get('choice')
+            if ch != 3:
+                post = Post.objects.filter(author = request.user).first()
+                if ch == 1:
+                    post.covid_cap -= 1
+                else:
+                    post.norm_cap -= 1
+                post.save()
+
+        BedRequest.objects.filter(pk = pk).delete()
+        return redirect('dash-view')  
+    else:
+        form =Booking()
+        
+        return render(request,'blog/patient_detail.html', {
+            "form": form,
+            "post": get_object_or_404(BedRequest, pk=pk),
+        })
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
@@ -87,4 +129,15 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         if self.request.user == post.author:
             return True
         return False
+
+def FilteredPatientView(request):
+    requests = BedRequest.objects.filter(health_centre = request.user)
+    posts = Post.objects.filter(author = request.user)
+    context = {
+        'requests' : requests,
+        'posts': posts
+    }
+    print(requests)
+    return render(request, 'blog/dashboard.html',context)
+
 

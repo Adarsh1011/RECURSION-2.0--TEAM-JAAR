@@ -16,6 +16,8 @@ Including another URLconf
 from django.urls import path
 # from .views import PostDetailView
 from . import views
+from users import views as user_views
+from django.contrib.auth import views as auth_views
 from .views import (
                     PostUpdateView, PostDeleteView
 )
@@ -25,6 +27,8 @@ urlpatterns = [
     path('about/', views.about, name="blog-about"),
     path('post/new/', views.PostCreateView, name='post-create'),
     path('post/<int:pk>/', views.PostDetailView, name='post-detail'),
+    path('patient/<int:pk>/', views.PatientDetailView, name='patient-detail'),
     path('post/<int:pk>/update', PostUpdateView.as_view(), name='post-update'),
     path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
+    path('dashboard/', views.FilteredPatientView, name='dash-view'),
 ]
