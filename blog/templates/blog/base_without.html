@@ -45,18 +45,16 @@
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
                             <li class="scroll-to-section"><a class="nav-item nav-link" href="{% url 'blog-home' %}">Home</a></li>
-                            <li class="scroll-to-section"><a class="nav-item nav-link" href="#frequently-question">FAQs</a></li>
                             <!-- <li class="scroll-to-section"><a href="#frequently-question">Frequently Questions</a></li> -->
                             {% if user.is_authenticated %}
                             
-                            <li class="submenu">
+                            <!-- <li class="submenu">
                               <a href="javascript:;">Activities</a>
-                              <ul>
-                                  <li><a class="nav-item nav-link" href="{% url 'dash-view' %}">Dashboard</a></li>
-                                  <li><a class="nav-item nav-link" href="{% url 'post-create' %}">Enter Yourself</a></li>
-                                  <li><a href="">Blog</a></li>
-                              </ul>
-                            </li>
+                              <ul> -->
+                                  <li class="scroll-to-section"><a class="nav-item nav-link" href="{% url 'dash-view' %}">Dashboard</a></li>
+                                  <li class="scroll-to-section"><a class="nav-item nav-link" href="{% url 'post-create' %}">Hospital Profile</a></li>
+                              <!-- </ul>
+                            </li> -->
                       <!-- <li class="scroll-to-section"><a class="nav-item nav-link" href="{% url 'dash-view' %}">Dashboard</a></li>
                       <li class="scroll-to-section"><a class="nav-item nav-link" href="{% url 'post-create' %}">Enter Yourself</a></li> -->
                       <li class="scroll-to-section"><a class="nav-item nav-link" href="{% url 'logout' %}">Log Out</a>
