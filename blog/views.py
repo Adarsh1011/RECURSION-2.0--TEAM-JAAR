@@ -32,20 +32,8 @@ def mainHome(request):
 
 def home(request):
     context={
-        'posts': Post.objects.all()
+        'posts': Post.objects.all('-covid_cap')
     }
-    objects = []
-    qty = []
-    queryset = Post.objects.all()
-    for entry in queryset:
-        objects.append(entry.name)
-        qty.append(entry.covid_cap+entry.norm_cap)
-    y_pos = np.arange(len(objects))
-    plt.bar(y_pos, qty, align='center', alpha=0.5)
-    plt.xticks(y_pos, objects)
-    plt.ylabel('No of Beds')
-    plt.title('Hospital')
-    plt.savefig('media/barchart.png')
     return render(request, 'blog/home.html', context)
 
 def about(request):
@@ -69,6 +57,7 @@ def PostCreateView(request):
             }
             return render(request,'blog/post_form.html',context)
     else:
+        messages.warning(request, f"You already have entered your hospital")
         return redirect("blog-home")
 
 # @login_required

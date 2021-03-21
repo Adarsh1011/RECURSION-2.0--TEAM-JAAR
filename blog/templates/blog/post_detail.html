@@ -140,6 +140,7 @@
                 {% endif %}
             </form>
                 -->
+                {%if not user.is_authenticated %}
             <form method="POST">
                 {% csrf_token %}
                 <fieldset class="form-group">
@@ -149,6 +150,7 @@
                     <button class="btn btn-outline-info" type="submit">Book a Bed</button>
                 </div>
             </form>
+            {% endif %}
         </div> 
         
     </article>
