@@ -2,23 +2,18 @@
 
     {% extends "blog/base_without.html" %}
     {% block content %}
-    <div id="preloader">
-        <div class="jumper">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </div>  
+      
 
     <div class="welcome-area" id="welcome">
-
+        
         <!-- ***** Header Text Start ***** -->
         <div class="header-text">
+            
             <div class="container">
                 <div class="row">
                     <div class="left-text col-lg-6 col-md-6 col-sm-12 col-xs-12" data-scroll-reveal="enter left move 30px over 0.6s after 0.4s">
-                        <h1>Art Factory is free <strong>for YOU</strong></h1>
-                        <p>This template is available for 100% free of charge on TemplateMo. Download, modify and use this for your business website.</p>
+                        <h1>Vaccination with <strong>COVID Saathi</strong></h1>
+                        <p>COVID k saath bhi, COVID k baad bhi :)</p>
                         <a href="#about" class="main-button-slider">Find Out More</a>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" data-scroll-reveal="enter right move 30px over 0.6s after 0.4s">
@@ -39,12 +34,13 @@
                 </div>
                 <div class="right-text col-lg-5 col-md-12 col-sm-12 mobile-top-fix">
                     <div class="left-heading">
-                        <h5>Vivamus sodales nisi id ante molestie venenatis</h5>
+                        <h5>About COVID Saathi</h5>
                     </div>
                     <div class="left-text">
                         <p>This template is <a href="#">last updated on 20 August 2019 </a>for main menu drop-down arrow and sub menu text color. Duis auctor dolor eu scelerisque vestibulum. Vestibulum lacinia, nisl sit amet tristique condimentum. <br><br>
                         Sed a consequat velit. Morbi lectus sapien, vestibulum et sapien sit amet, ultrices malesuada odio. Donec non quam euismod, mattis dui a, ultrices nisi.</p>
-                        <a href="#about2" class="main-button">Discover More</a>
+                        <a href="{% url 'blog-home' %}" class="main-button">Available Beds</a>
+                        
                     </div>
                 </div>
             </div>
@@ -64,7 +60,7 @@
             <div class="row">
                 <div class="left-text col-lg-5 col-md-12 col-sm-12 mobile-bottom-fix">
                     <div class="left-heading">
-                        <h5>Curabitur aliquam eget tellus id porta</h5>
+                        <h5>How to Use our website?</h5>
                     </div>
                     <p>Proin justo sapien, posuere suscipit tortor in, fermentum mattis elit. Aenean in feugiat purus.</p>
                     <ul>
@@ -299,7 +295,7 @@
         <div class="container-fluid">
             <div class="row">
                 <!-- ***** Contact Map Start ***** -->
-                <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="col-lg-8 col-md-6 col-sm-12">
                     <div id="map">
                       <!-- How to change your own map point
                            1. Go to Google Maps
@@ -307,38 +303,17 @@
                            3. Click "Share" and choose "Embed map" tab
                            4. Copy only URL and paste it within the src="" field below
                     -->
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1197183.8373802372!2d-1.9415093691103689!3d6.781986417238027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdb96f349e85efd%3A0xb8d1e0b88af1f0f5!2sKumasi+Central+Market!5e0!3m2!1sen!2sth!4v1532967884907" width="100%" height="500px" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    <iframe style="width: 100%; height: 500px;" src="https://maps.mapmyindia.com/corona" ></iframe>
                     </div>
                 </div>
                 <!-- ***** Contact Map End ***** -->
 
                 <!-- ***** Contact Form Start ***** -->
-                <div class="col-lg-6 col-md-6 col-sm-12">
-                    <div class="contact-form">
-                        <form id="contact" action="" method="post">
-                          <div class="row">
-                            <div class="col-md-6 col-sm-12">
-                              <fieldset>
-                                <input name="name" type="text" id="name" placeholder="Full Name" required="" class="contact-field">
-                              </fieldset>
-                            </div>
-                            <div class="col-md-6 col-sm-12">
-                              <fieldset>
-                                <input name="email" type="text" id="email" placeholder="E-mail" required="" class="contact-field">
-                              </fieldset>
-                            </div>
-                            <div class="col-lg-12">
-                              <fieldset>
-                                <textarea name="message" rows="6" id="message" placeholder="Your Message" required="" class="contact-field"></textarea>
-                              </fieldset>
-                            </div>
-                            <div class="col-lg-12">
-                              <fieldset>
-                                <button type="submit" id="form-submit" class="main-button">Send It</button>
-                              </fieldset>
-                            </div>
-                          </div>
-                        </form>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div style="height: 500px;" class="contact-form">
+                        <div class="section-heading">
+                            <h2 style="font-weight: 700;">Find Your Nearest Vaccination Center</h2>
+                        </div>
                     </div>
                 </div>
                 <!-- ***** Contact Form End ***** -->
@@ -352,12 +327,8 @@
     <footer>
         <div class="container">
             <div class="row">
-                <div class="col-lg-7 col-md-12 col-sm-12">
-                    <p class="copyright">Copyright &copy; 2020 Art Factory Company 
                 
-                . Design: <a rel="nofollow" href="https://templatemo.com">TemplateMo</a></p>
-                </div>
-                <div class="col-lg-5 col-md-12 col-sm-12">
+                <div class="col-lg-12 col-md-12 col-sm-12">
                     <ul class="social">
                         <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                         <li><a href="#"><i class="fa fa-twitter"></i></a></li>

@@ -35,6 +35,8 @@ urlpatterns = [
     path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
     path('dashboard/', views.FilteredPatientView, name='dash-view'),
     path('chart/', views.bed_chart, name='bed-chart'),
+    path('category1/<str:cats>/', views.FilteredCityView, name='category1'),
+    path('category2/<str:cats>/', views.FilteredAreaView, name='category2'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

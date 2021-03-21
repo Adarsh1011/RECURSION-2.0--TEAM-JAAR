@@ -12,6 +12,7 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     city = models.CharField(max_length=10, default="Mumbai")
     address = models.TextField(default="Maharashtra")
+    area =models.CharField(max_length=10, default="Andheri")
     covid_cap=models.IntegerField(default=0)
     norm_cap = models.IntegerField(default=0)
 
@@ -24,6 +25,7 @@ class Post(models.Model):
 class BedRequest(models.Model):
     aadhar_number = models.IntegerField(max_length = 16)
     phone_number = models.IntegerField(max_length = 10)
+    email = models.EmailField(default='jmak0015@gmail.com')
     name = models.CharField(max_length =100)
     address = models.CharField(max_length=100)
     # proof= models.ImageField(default = 'default.jpg', upload_to='proof_pics')

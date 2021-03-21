@@ -26,6 +26,13 @@ SECRET_KEY = '#xc+isx#g=t$wre!p^t-#!qip&$&+t)(^==m^fqtb@cob@&(0x'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+EMAIL_HOST= 'smtp.zoho.in'
+EMAIL_HOST_USER ='jmak0015@gmail.com'
+EMAIL_HOST_PASSWORD='wreceikTiph2'
+EMAIL_PORT=587
+EMAIL_USE_TLS =True
+EMAIL_BACKEND ='django.core.mail.backends.smtp.EmailBackend'
+
 ALLOWED_HOSTS = []
 
 
@@ -131,4 +138,11 @@ MEDIA_URL = '/media/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = 'blog-home'
 LOGIN_URL = 'login'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'arjunbalamwar@gmail.com'
+EMAIL_HOST_PASSWORD = 'upyvjnrlgzzxrxek'
 

@@ -14,6 +14,8 @@ from rest_framework.response import Response
 from django.http import JsonResponse
 import matplotlib.pyplot as plt
 import numpy as np
+from django.conf import settings
+from django.core.mail import send_mail
 
 def mainHome(request):
     # objects = []
@@ -31,8 +33,10 @@ def mainHome(request):
     return render(request, 'blog/index.html',)
 
 def home(request):
+    
+    posts  = Post.objects.all().order_by("-covid_cap")
     context={
-        'posts': Post.objects.all()
+        'posts': Post.objects.all().order_by("-covid_cap")
     }
     return render(request, 'blog/home.html', context)
 
@@ -113,8 +117,11 @@ def PatientDetailView(request, pk):
                 else:
                     post.norm_cap -= 1
                 post.save()
-
-        BedRequest.objects.filter(pk = pk).delete()
+                rq = BedRequest.objects.filter(pk = pk).first()
+                send_mail('COVID Saathi has some good news for you!',f' {request.user} has accepted your booking!',settings.EMAIL_HOST_USER,[f'{rq.email}'],fail_silently=False)
+                BedRequest.objects.filter(aadhar_number = rq.aadhar_number).delete()
+            else:
+                BedRequest.objects.filter(pk = pk).delete()
         return redirect('dash-view')  
     else:
         form =Booking()
@@ -201,7 +208,23 @@ def bed_chart(request):
         'data': data,
     })
 
-def bed_chart(request):
-    
-    
-    return render(request,'chart.html')
+def FilteredCityView(request, cats):
+    category_posts = []
+    # users = Post.objects.filter(city=cats)
+    posts = Post.objects.filter(city=cats)
+    # for post in posts:
+    #    if post.author.profile.blood_group == cats:
+    #        category_posts.append(post)
+
+    return render(request, 'blog/categories.html', {'cats': cats, 'posts': posts})
+
+
+def FilteredAreaView(request, cats):
+    category_posts = []
+    # users = Post.objects.filter(city=cats)
+    posts = Post.objects.filter(area=cats)
+    # for post in posts:
+    #    if post.author.profile.blood_group == cats:
+    #        category_posts.append(post)
+
+    return render(request, 'blog/categories.html', {'cats': cats, 'posts': posts})

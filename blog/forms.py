@@ -8,7 +8,7 @@ GENDER = [('Male', 'Male'),('Female', 'Female'), ('Other', 'Other')]
 CITY = [('Mumbai', 'Mumbai'), ('Pune', 'Pune'), ('Nagpur', 'Nagpur'), ('Delhi', 'Delhi'), ('Noida', 'Noida'), ('Chandigarh', 'Chandigarh'), ('Amritsar', 'Amritsar')]
 BOOKING = [(1, 'Allow Covid Bed Registration'),(2, 'Allow Bed Registration'), (3, 'Delete Entry')]
 SCHEME = [('Life Insurance', 'Life Insurance'), ('Govt. Scheme','Govt. Scheme'), ('MSME Loan','MSME Loan')]
-
+AREA =[('Andheri','Andheri'),('Worli','Worli'),('Bandra','Bandra'),('Breach Candy','Breach Candy'),('Thane','Thane'),('Ghatkopar','Ghatkopar'),('Friends Colony','Friends Colony'),('Hinjawadi','Hinjwadi'),('Chandini Chowk','Chandani Chowk')]
 # class PostForm(forms.ModelForm):
 #     class Meta:
 #         model = Post
@@ -31,17 +31,19 @@ class PostForm(forms.ModelForm):
     covid_cap=forms.IntegerField(label='Number of covid beds?')
     norm_cap = forms.IntegerField(label='Number of covid beds?')
     city = forms.CharField(widget=forms.Select(choices=CITY))
+    area = forms.CharField(widget=forms.Select(choices=AREA))
     address = forms.Textarea()
 
     class Meta:
         model = Post 
-        fields = ['name', 'content', 'covid_cap', 'norm_cap', 'city',
+        fields = ['name', 'content', 'covid_cap', 'norm_cap', 'city', 'area',
                    'address'
                  ]
 
 class BedForm(forms.ModelForm):
     aadhar_number =forms.IntegerField()
     phone_number =forms.IntegerField()
+    email = forms.EmailField()
     name=forms.CharField(label='What is your name?')
     address=forms.CharField(label='What is your Address?')
     # proof=forms.ImageField()
@@ -66,7 +68,7 @@ class BedForm(forms.ModelForm):
 
     class Meta:
         model= BedRequest
-        fields=('aadhar_number', 'name', 'phone_number', 'address' , 'city', 'pin_code',  'age', 'gender', 
+        fields=('aadhar_number', 'name', 'email', 'phone_number', 'address' , 'city', 'pin_code',  'age', 'gender', 
              'co_mobidity', 'ambulance_required', 'scheme', 'tested','symptoms'
         #   'proof',
         )

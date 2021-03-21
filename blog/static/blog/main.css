@@ -1,5 +1,4 @@
 body {
-    
     color: #333333;
     margin-top: 7rem;
   }
@@ -19,10 +18,14 @@ body {
   .site-header .navbar-nav .nav-link {
     color: #cbd5db;
   }
+
+  header.header-area.header-sticky {
+    background: rgb(12, 194, 94) !important;
+}
   
-  .site-header .navbar-nav .nav-link:hover {
+  /* .site-header .navbar-nav .nav-link:hover {
     color: #ffffff;
-  }
+  } */
   
   .site-header .navbar-nav .nav-link.active {
     font-weight: 500;

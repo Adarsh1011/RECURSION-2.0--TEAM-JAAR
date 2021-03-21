@@ -6,7 +6,7 @@
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+        <script id="gs-sdk" src='//www.buildquickbots.com/botwidget/v3/demo/static/js/sdk.js?v=3' key="2de8d293-c16d-42e5-ab6e-28caf5b424e7" ></script>
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="../../static/blog/css/bootstrap.min.css">
@@ -16,6 +16,11 @@
 
         <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+        <script type="text/javascript">
+          function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+          }
+          </script>
         <title>Covid Saathi</title>
     </head>
     <body>
@@ -23,9 +28,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
+                  
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
-                        <a href="#" class="logo">Art Factory</a>
+                        <a href="/" class="logo">Covid Saathi</a>
+      
+
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
@@ -37,7 +45,7 @@
                             {% if user.is_authenticated %}
                             
                             <li class="submenu">
-                              <a href="javascript:;">Drop Down</a>
+                              <a href="javascript:;">Activities</a>
                               <ul>
                                   <li><a class="nav-item nav-link" href="{% url 'dash-view' %}">Dashboard</a></li>
                                   <li><a class="nav-item nav-link" href="{% url 'post-create' %}">Enter Yourself</a></li>
@@ -108,6 +116,7 @@
               
             </div>
         </main> 
+        
         {% block content %}{% endblock %}
 
         <script src="../../static/blog/js/jquery-2.1.0.min.js"></script>
