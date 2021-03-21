@@ -16,18 +16,18 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 def mainHome(request):
-    objects = []
-    qty = []
-    queryset = Post.objects.all()
-    for entry in queryset:
-        objects.append(entry.name)
-        qty.append(entry.covid_cap+entry.norm_cap)
-    y_pos = np.arange(len(objects))
-    plt.bar(y_pos, qty, align='center', alpha=0.5)
-    plt.xticks(y_pos, objects)
-    plt.ylabel('No of Beds')
-    plt.title('Hospital')
-    plt.savefig('media/barchart.png')
+    # objects = []
+    # qty = []
+    # queryset = Post.objects.all()
+    # for entry in queryset:
+    #     objects.append(entry.name)
+    #     qty.append(entry.covid_cap+entry.norm_cap)
+    # y_pos = np.arange(len(objects))
+    # plt.bar(y_pos, qty, align='center', alpha=0.5)
+    # plt.xticks(y_pos, objects)
+    # plt.ylabel('No of Beds')
+    # plt.title('Hospital')
+    # plt.savefig('media/barchart.png')
     return render(request, 'blog/index.html',)
 
 def home(request):

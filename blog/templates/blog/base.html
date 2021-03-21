@@ -9,11 +9,62 @@
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="../../static/blog/css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="../../static/blog/css/font-awesome.css">
+      <link rel="stylesheet" type="text/css" href="../../static/blog/css/templatemo-art-factory.css">
+    <link rel="stylesheet" type="text/css" href="../../static/blog/css/owl-carousel.css">
+
         <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">
-        <title>Hello, world!</title>
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+        <title>Covid Saathi</title>
     </head>
     <body>
-        <header class="site-header">
+      <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="#" class="logo">Art Factory</a>
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li class="scroll-to-section"><a  href="{% url 'blog-home' %}">Home</a></li>
+                            <li class="scroll-to-section"><a  href="{% url 'blog-about' %}">About</a></li>
+                            <li class="scroll-to-section"><a  href="#contact-us">Contact</a></li>
+                            <li class="scroll-to-section"><a  href="#frequently-question">FAQs</a></li>
+                            <!-- <li class="scroll-to-section"><a href="#frequently-question">Frequently Questions</a></li> -->
+                            {% if user.is_authenticated %}
+                            
+                            <li class="submenu">
+                              <a href="javascript:;">Drop Down</a>
+                              <ul>
+                                  <li><a  href="{% url 'dash-view' %}">Dashboard</a></li>
+                                  <li><a  href="{% url 'post-create' %}">Enter Yourself</a></li>
+                                  <li><a href="">Blog</a></li>
+                              </ul>
+                            </li>
+                      <!-- <li class="scroll-to-section"><a  href="{% url 'dash-view' %}">Dashboard</a></li>
+                      <li class="scroll-to-section"><a  href="{% url 'post-create' %}">Enter Yourself</a></li> -->
+                      <li class="scroll-to-section"><a  href="{% url 'logout' %}">Log Out</a>
+                    {% else %}
+                      <li class="scroll-to-section"><a  href="{% url 'login' %}">Login</a></li>
+                      <li class="scroll-to-section"><a  href="{% url 'register' %}">Register</a></li>
+                    {% endif %}
+                            
+                        </ul>
+                        <!-- <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a> -->
+                        <!-- ***** Menu End ***** -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+
+        <!-- <header class="site-header">
             <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
                 <div class="container">
                 <a class="navbar-brand mr-4" href="/">Django Blog</a>
@@ -25,7 +76,7 @@
                     <a class="nav-item nav-link" href="{% url 'blog-home' %}">Home</a>
                     <a class="nav-item nav-link" href="{% url 'blog-about' %}">About</a>
                     </div>
-                    <!-- Navbar Right Side -->
+                    Navbar Right Side
                     {% if user.is_authenticated %}
                     <div class="navbar-nav">
                       <a class="nav-item nav-link" href="{% url 'dash-view' %}">Dashboard</a>
@@ -42,8 +93,8 @@
                 </div>
                 </div>
             </nav>
-        </header>
-        <main role="main" class="container">
+        </header> -->
+        <main style="margin-top: 100px;" role="main" class="container">
             <div class="row">
               <div class="col-md-8">
                 {% if messages %}
@@ -56,21 +107,58 @@
                 {% block content %}{% endblock %}
               </div>
               <div class="col-md-4">
-                <div class="content-section">
-                  <h3>Our Sidebar</h3>
-                  <p class='text-muted'>You can put any information here you'd like.
-                    <ul class="list-group">
-                      <li class="list-group-item list-group-item-light">Latest Posts</li>
-                      <li class="list-group-item list-group-item-light">Announcements</li>
-                      <li class="list-group-item list-group-item-light">Calendars</li>
-                      <li class="list-group-item list-group-item-light">etc</li>
-                    </ul>
-                  </p>
+                <div >
+                    <h3>Filters Available</h3>
+                    <p class='text-muted'>Choose the option which is most suitable for you</p>
+                    
+                        <div class="dropdown navElements">
+                            <button class="dropbtn">City</button>
+                            <div class="dropdown-content">
+                                <a href="/category1/Mumbai/">Mumbai</a>
+                                <a href="/category1/Pune/">Pune</a>
+                                <a href="/category1/Nagpur/">Nagpur</a>   
+                                <a href="/category1/Delhi/">Delhi</a>
+                                <a href="/category1/Noida/">Noida</a>
+                                <a href="/category1/Chandigarh/">Chandigarh</a>
+                                <a href="/category1/Amritsar/">Amritsar</a>
+                            </div>
+                        </div>
+                        <div style="margin-left: 10px;" class="dropdown navElements">
+                            <button class="dropbtn">Area</button>
+                            <div class="dropdown-content">
+
+                                <a href="/category2/Andheri/">Andheri</a>
+                                <a href="/category2/Worli/">Worli</a>
+                                <a href="/category2/Bandra/">Bandra</a>
+                                <a href="/category2/Breach_Candy/">Breach Candy</a>
+                                <a href="/category2/Thane/">Thane</a>
+                                <a href="/category2/Ghatkopar/">Ghatkopar</a>
+                                <a href="/category2/Friends_Colony/">Friends Colony</a>
+                                <a href="/category2/Hinjawadi/">Hinjawadi</a>
+                                <a href="/category2/Chandani_Chowk/">Chandani Chowk'</a>
+                                
+                        </div>                  
+ 
                 </div>
-              </div>
+                </div>
+        </div>
             </div>
         </main> 
+        <script src="../../static/blog/js/jquery-2.1.0.min.js"></script>
 
+        <!-- Bootstrap -->
+        <script src="../../static/blog/js/popper.js"></script>
+        <script src="../../static/blog/js/bootstrap.min.js"></script>
+    
+        <!-- Plugins -->
+        <script src="../../static/blog/js/owl-carousel.js"></script>
+        <script src="../../static/blog/js/scrollreveal.min.js"></script>
+        <script src="../../static/blog/js/waypoints.min.js"></script>
+        <script src="../../static/blog/js/jquery.counterup.min.js"></script>
+        <script src="../../static/blog/js/imgfix.min.js"></script> 
+        
+        <!-- Global Init -->
+        <script src="../../static/blog/js/custom.js"></script>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
