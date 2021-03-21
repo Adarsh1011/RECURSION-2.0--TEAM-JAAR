@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-
+from rest_framework.views import APIView
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from .forms import PostForm, BedForm, Booking
@@ -10,12 +10,42 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (ListView, DetailView, CreateView,
                                   UpdateView, DeleteView
 )
+from rest_framework.response import Response
+from django.http import JsonResponse
+import matplotlib.pyplot as plt
+import numpy as np
 
+def mainHome(request):
+    objects = []
+    qty = []
+    queryset = Post.objects.all()
+    for entry in queryset:
+        objects.append(entry.name)
+        qty.append(entry.covid_cap+entry.norm_cap)
+    y_pos = np.arange(len(objects))
+    plt.bar(y_pos, qty, align='center', alpha=0.5)
+    plt.xticks(y_pos, objects)
+    plt.ylabel('No of Beds')
+    plt.title('Hospital')
+    plt.savefig('media/barchart.png')
+    return render(request, 'blog/index.html',)
 
 def home(request):
     context={
         'posts': Post.objects.all()
     }
+    objects = []
+    qty = []
+    queryset = Post.objects.all()
+    for entry in queryset:
+        objects.append(entry.name)
+        qty.append(entry.covid_cap+entry.norm_cap)
+    y_pos = np.arange(len(objects))
+    plt.bar(y_pos, qty, align='center', alpha=0.5)
+    plt.xticks(y_pos, objects)
+    plt.ylabel('No of Beds')
+    plt.title('Hospital')
+    plt.savefig('media/barchart.png')
     return render(request, 'blog/home.html', context)
 
 def about(request):
@@ -141,3 +171,48 @@ def FilteredPatientView(request):
     return render(request, 'blog/dashboard.html',context)
 
 
+# def get_data(request, *args, **kwargs):
+#     data = {
+#         "sales": 100,
+#         "customers": 10,
+#     }
+#     return JsonResponse(data) # http response
+
+# class ChartData(APIView):
+#     authentication_classes = []
+#     permission_classes = []
+
+#     def get(self, request, format=None):
+#         qs=Post.objects.all()
+        
+#         labels = []
+#         default_items = []
+
+#         for item in qs:
+#             labels.append(item.name)
+#             default_items.append(item.covid_cap+item.norm_cap)
+
+#         data = {
+#                 "labels": labels,
+#                 "default": default_items,
+#         }
+#         return Response(data)
+
+def bed_chart(request):
+    labels = []
+    data = []
+
+    queryset = Post.objects.all()
+    for entry in queryset:
+        labels.append(entry.name)
+        data.append(entry.covid_cap+item.norm_cap)
+    
+    return JsonResponse(data={
+        'labels': labels,
+        'data': data,
+    })
+
+def bed_chart(request):
+    
+    
+    return render(request,'chart.html')
