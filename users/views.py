@@ -14,4 +14,5 @@ def register(request):
             return redirect('login')
     else:
         form = UserRegisterForm()
+        print("Loops==================")
     return render(request, 'users/register.html', {'form': form, 'user': request.user})

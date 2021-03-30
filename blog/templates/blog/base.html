@@ -6,7 +6,7 @@
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <script id="gs-sdk" src='//www.buildquickbots.com/botwidget/v3/demo/static/js/sdk.js?v=3' key="2de8d293-c16d-42e5-ab6e-28caf5b424e7" ></script>
+        <!-- <script id="gs-sdk" src='//www.buildquickbots.com/botwidget/v3/demo/static/js/sdk.js?v=3' key="2de8d293-c16d-42e5-ab6e-28caf5b424e7" ></script> -->
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="../../static/blog/css/bootstrap.min.css">
@@ -16,10 +16,10 @@
 
         <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
-        <script
+        <!-- <script
         type="text/javascript"
         src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-      ></script>
+      ></script> -->
       <script type="text/javascript">
         function googleTranslateElementInit() {
           new google.translate.TranslateElement(
@@ -31,7 +31,7 @@
             
         <title>Covid Saathi</title>
     </head>
-    <body>
+    <body background="#003 !important">
       <style>
        
         .goog-logo-link img {
@@ -113,7 +113,7 @@ line-height: 20px;
                 <div class="col-12">
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
-                        <a href="/" class="logo">Covid Saathi</a>
+                        <a href="/" class="logo">PrimeFlix</a>
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         
@@ -126,16 +126,18 @@ line-height: 20px;
                                 <li class="scroll-to-section"><a href="javascript:;">Activities</a></li>
                               <ul> -->
                                 <li class="scroll-to-section"><a class="nav-item nav-link" href="{% url 'dash-view' %}">Dashboard</a></li>
-                                <li class="scroll-to-section"><a class="nav-item nav-link" href="{% url 'post-create' %}">Hospital Profile</a></li>
+                                {% if user.is_superuser %}
+                                    <li class="scroll-to-section"><a class="nav-item nav-link" href="{% url 'post-create' %}">Add Post</a></li>
+                                {% endif %}
                               <!-- </ul>
                             </li> -->
-                      <!-- <li class="scroll-to-section"><a  href="{% url 'dash-view' %}">Dashboard</a></li>
-                      <li class="scroll-to-section"><a  href="{% url 'post-create' %}">Enter Yourself</a></li> -->
-                      <li class="scroll-to-section"><a class="nav-item nav-link" href="{% url 'logout' %}">Log Out</a>
-                    {% else %}
-                      <li class="scroll-to-section"><a class="nav-item nav-link" href="{% url 'login' %}">Login</a></li>
-                      <li class="scroll-to-section"><a class="nav-item nav-link" href="{% url 'register' %}">Register</a></li>
-                    {% endif %}
+                              <!-- <li class="scroll-to-section"><a  href="{% url 'dash-view' %}">Dashboard</a></li>
+                              <li class="scroll-to-section"><a  href="{% url 'post-create' %}">Enter Yourself</a></li> -->
+                              <li class="scroll-to-section"><a class="nav-item nav-link" href="{% url 'logout' %}">Log Out</a>
+                            {% else %}
+                              <li class="scroll-to-section"><a class="nav-item nav-link" href="{% url 'login' %}">Login</a></li>
+                              <li class="scroll-to-section"><a class="nav-item nav-link" href="{% url 'register' %}">Register</a></li>
+                            {% endif %}
                             
                         </ul>
                         <!-- <a class='menu-trigger'>
@@ -200,31 +202,23 @@ line-height: 20px;
                     <p class='text-muted'>Choose the option which is most suitable for you</p>
                     
                         <div class="dropdown navElements">
-                            <button class="dropbtn">City</button>
+                            <button class="dropbtn">Genre</button>
                             <div class="dropdown-content">
-                                <a href="/category1/Mumbai/">Mumbai</a>
-                                <a href="/category1/Pune/">Pune</a>
-                                <a href="/category1/Nagpur/">Nagpur</a>   
-                                <a href="/category1/Delhi/">Delhi</a>
+                                <a href="/category1/Comedy/">Comedy</a>
+                                <a href="/category1/Action/">Action</a>
+                                <a href="/category1/Horror/">Horror</a>   
+                                <a href="/category1/Adventure/">Adventure</a>
                                 <a href="/category1/Noida/">Noida</a>
                                 <a href="/category1/Chandigarh/">Chandigarh</a>
                                 <a href="/category1/Amritsar/">Amritsar</a>
                             </div>
                         </div>
                         <div style="margin-left: 10px;" class="dropdown navElements">
-                            <button class="dropbtn">Area</button>
+                            <button class="dropbtn">Type</button>
                             <div class="dropdown-content">
 
-                                <a href="/category2/Andheri/">Andheri</a>
-                                <a href="/category2/Worli/">Worli</a>
-                                <a href="/category2/Bandra/">Bandra</a>
-                                <a href="/category2/Breach_Candy/">Breach Candy</a>
-                                <a href="/category2/Thane/">Thane</a>
-                                <a href="/category2/Ghatkopar/">Ghatkopar</a>
-                                <a href="/category2/Friends_Colony/">Friends Colony</a>
-                                <a href="/category2/Hinjawadi/">Hinjawadi</a>
-                                <a href="/category2/Chandani_Chowk/">Chandani Chowk'</a>
-                                
+                                <a href="/category2/Movies/">Movies</a>
+                                <a href="/category2/TV/">TV Shows</a>
                         </div>                  
  
                 </div>
@@ -252,6 +246,18 @@ line-height: 20px;
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         {% block jquery %}{% endblock %}
-    
+        
+        {% if post_list.has_other_pages %}
+          <nav aria-label="Page navigation conatiner"></nav>
+          <ul class="pagination justify-content-center">
+            {% if post_list.has_previous %}
+            <li><a href="?page={{ post_list.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
+            {% endif %}
+            {% if post_list.has_next %}
+            <li><a href="?page={{ post_list.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+          {% endif %}
+          </ul>
+          </nav>
+        {% endif %}
       </body>
 </html>

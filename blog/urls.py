@@ -21,22 +21,23 @@ from django.conf import settings
 from users import views as user_views
 from django.contrib.auth import views as auth_views
 from .views import (
-                    PostUpdateView, PostDeleteView, bed_chart
+                    PostUpdateView, PostDeleteView
 )
 
 urlpatterns = [
-    path('all', views.home, name="blog-home"),
-    path('', views.mainHome, name="main-home"),
+    path('', views.home, name="blog-home"),
+    path('all', views.mainHome, name="main-home"),
     path('about/', views.about, name="blog-about"),
+    # path('update/', views.update, name="update"),
     path('post/new/', views.PostCreateView, name='post-create'),
     path('post/<int:pk>/', views.PostDetailView, name='post-detail'),
-    path('patient/<int:pk>/', views.PatientDetailView, name='patient-detail'),
+    # path('patient/<int:pk>/', views.PatientDetailView, name='patient-detail'),
     path('post/<int:pk>/update', PostUpdateView.as_view(), name='post-update'),
     path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
-    path('dashboard/', views.FilteredPatientView, name='dash-view'),
-    path('chart/', views.bed_chart, name='bed-chart'),
-    path('category1/<str:cats>/', views.FilteredCityView, name='category1'),
-    path('category2/<str:cats>/', views.FilteredAreaView, name='category2'),
+    path('dashboard/', views.watchLater, name='dash-view'),
+    path('category1/<str:cats>/', views.FilteredGenreView, name='category1'),
+    path('category2/<str:cats>/', views.FilteredTypeView, name='category2'),
+    path('search/<str:cats>/', views.home_search, name="home-search"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
